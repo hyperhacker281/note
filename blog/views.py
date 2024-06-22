@@ -35,30 +35,30 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
 
 
-# if users are allowed to view only their own posts, not anyone else's, then leave this and the next class uncommented
-class PostListView(LoginRequiredMixin, ListView):
-    model = Post
-    template_name = 'blog/home.html'
-    context_object_name = 'posts' 
-    ordering = ['-date_posted']
-    paginate_by = 20
+# # if users are allowed to view only their own posts, not anyone else's, then leave this and the next class uncommented
+# class PostListView(LoginRequiredMixin, ListView):
+#     model = Post
+#     template_name = 'blog/home.html'
+#     context_object_name = 'posts' 
+#     ordering = ['-date_posted']
+#     paginate_by = 20
 
-    # modifying the function for returning posts
-    def get_queryset(self):
+#     # modifying the function for returning posts
+#     def get_queryset(self):
        
-        search_query = self.request.GET.get('search', '')
+#         search_query = self.request.GET.get('search', '')
 
-        queryset = Post.objects.filter(Q(content__lower__contains=search_query)).filter(author_id=self.request.user.id).order_by('-date_posted')
-        return queryset
+#         queryset = Post.objects.filter(Q(content__lower__contains=search_query)).filter(author_id=self.request.user.id).order_by('-date_posted')
+#         return queryset
 
-class PostDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
-    model = Post
+# class PostDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+#     model = Post
 
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+#     def test_func(self):
+#         post = self.get_object()
+#         if self.request.user == post.author:
+#             return True
+#         return False
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):

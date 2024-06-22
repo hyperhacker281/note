@@ -10,7 +10,7 @@ SECRET_KEY = 'exhlfdat&vfum(-24*c2uf4wwddcp$o$9pv98=e6p^gl(-eoj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '127.0.0.1:8000','.vercel.app']
 
 # Application definition
 
@@ -58,8 +58,13 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'iLdYcOvSsNDxkARgJKtzGNhsaNUmJFpD',
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '18383'
     }
 }
 
